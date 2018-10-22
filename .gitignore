@@ -1,0 +1,63 @@
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+
+# JetBrains Rider
+.idea/
+*.sln.iml
+
+# User-specific stuff:
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/dictionaries
+
+# Sensitive or high-churn files:
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.xml
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+.idea/**/contentModel.xml
+
+# Windows thumbnail cache files
+Thumbs.db
+ehthumbs.db
+ehthumbs_vista.db
+/.vs/Akunoids/DesignTimeBuild/.dtbcache
+/.vs/Akunoids/v15/Server/sqlite3/db.lock
+/.vs/Akunoids/v15/Server/sqlite3/storage.ide
+/.vs/Akunoids/v15/Server/sqlite3/storage.ide-shm
+/.vs/Akunoids/v15/Server/sqlite3/storage.ide-wal
+/Akunoids/Content/SaRPaddleLarge.bmp
+/Akunoids/Content/KyL_SJBrick4.bmp
+/Akunoids/Content/KyL_SJBrick3.bmp
+/Akunoids/Content/KyL_SJBrick2.bmp
+/Akunoids/Content/KyL_SJBrick1.bmp
+/Akunoids/Content/KyL_ReadMe.txt
+/Akunoids/Content/KyL_PowerUpEyes.bmp
+/Akunoids/Content/KyL_JackRowKill.bmp
+/Akunoids/Content/KyL_GameOverJack.bmp
+/Akunoids/Content/KyL_GameOverBackground.bmp
+/Akunoids/Content/KyL_ComponentInteractionMatrix.xls
+/Akunoids/Content/KyL_Background.bmp
+/Akunoids/Content/KyL_AkuDeathEnd.bmp
+/Akunoids/Content/KyL_AkuBall.bmp
+/Akunoids/Content/KyL_AkuAdd.bmp
+/Akunoids/Content/Jack_and_the_raft.png
+/packages
