@@ -7,12 +7,10 @@ namespace Akunoids.Objects
     public class Paddle : SpriteObject
     {
         private float _movementSpeed = 5.0f;
-        private Rectangle _windowBounds;
         
-        public Paddle(Texture2D playerTexture, Vector2 startPos, Rectangle windowBounds) 
+        public Paddle(Texture2D playerTexture, Vector2 startPos) 
             : base(OBJTYPES.PADDLE, playerTexture, startPos, Vector2.Zero)
         {
-            _windowBounds = windowBounds;
         }
 
         override public void Update(GameTime gameTime)
@@ -31,7 +29,7 @@ namespace Akunoids.Objects
             }
             else if (kb.IsKeyDown(Keys.Right))
             {
-                var maxXPos = _windowBounds.Width - GetTexture().Width;
+                var maxXPos = ObjectManager.GetInstance().WindowBounds.Width - GetTexture().Width;
                 SetVelocity(_movementSpeed, 0.0f);
                 if (GetPosition().X >= maxXPos)
                 {

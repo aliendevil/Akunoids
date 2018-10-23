@@ -21,6 +21,22 @@ namespace Akunoids.Objects
         private List<SpriteObject> _spriteObjects;
 
         public Random rand = new Random();
+        public Rectangle WindowBounds;
+
+        private Texture2D _paddleTexture;
+        private Texture2D _ballTexture;
+        private Texture2D _brickTexture;
+        private Texture2D _powerUpTexture;
+
+        public void LoadTextures(Game game, Rectangle windowBounds)
+        {
+            WindowBounds = windowBounds;
+            _paddleTexture = game.Content.Load<Texture2D>(@"KyL_PaddleLarge");
+            _ballTexture = game.Content.Load<Texture2D>(@"KyL_AkuBall");
+            _brickTexture = game.Content.Load<Texture2D>(@"KyL_SJBrick1");
+            _powerUpTexture = game.Content.Load<Texture2D>(@"KyL_SJBrick1");
+        }
+
         public int GetSize () { return _spriteObjects.Count; }
         public int GetNumberOfBricks() { return GetBricks().Count; }
 
@@ -30,26 +46,33 @@ namespace Akunoids.Objects
 
         public void AddObject(SpriteObject sObject) { _spriteObjects.Add(sObject); }
 
-        public void AddObjectByType(OBJTYPES nType, Texture2D texture, Vector2 startPos, Rectangle windowBounds)
+        public void AddObjectByType(OBJTYPES nType, Vector2 startPos)
         {
             switch(nType)
             {
                 case OBJTYPES.PADDLE:
                     {
-                        Paddle player1 = new Paddle(texture, startPos, windowBounds);
+                        Paddle player1 = new Paddle(_paddleTexture, startPos);
                         _spriteObjects.Add(player1);
                         break;
                     }
                 case OBJTYPES.BRICK:
                     {
-                        Brick brick = new Brick(texture, startPos);
+                        Brick brick = new Brick(_brickTexture, startPos);
                         _spriteObjects.Add(brick);
                         break;
                     }
                 case OBJTYPES.BALL:
                     {
-                        Ball ball = new Ball(texture, startPos, windowBounds);
+                        Ball ball = new Ball(_ballTexture, startPos);
                         _spriteObjects.Add(ball);
+                        break;
+                    }
+                case OBJTYPES.POWERUP:
+                    {
+                        // TODO check to see if we have any inactive before creating
+                        PowerUp pUp = new PowerUp(_powerUpTexture, startPos);
+                        _spriteObjects.Add(pUp);
                         break;
                     }
             }
@@ -58,7 +81,8 @@ namespace Akunoids.Objects
         // Update all objects
         public void UpdateObjects(GameTime gameTime)
         {
-            foreach (SpriteObject sObj in _spriteObjects)
+            var spriteObjects = new List<SpriteObject>(_spriteObjects);
+            foreach (SpriteObject sObj in spriteObjects)
                 sObj.Update(gameTime);
         }
 

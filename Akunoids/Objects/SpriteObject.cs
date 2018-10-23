@@ -14,9 +14,12 @@ namespace Akunoids.Objects
 
         private readonly OBJTYPES _type;
 
+        public bool IsActive;  // TODO use this for tracking if this can be reused if false it is given to the next thing that wants that object (mainly used for powerups)
+
         public SpriteObject() { }
         public SpriteObject(OBJTYPES type, Texture2D texture)
         {
+            IsActive = true;
             _type = type;
             _tTexture = texture;
             _startPos = Vector2.Zero;
@@ -27,6 +30,7 @@ namespace Akunoids.Objects
         }
         public SpriteObject(OBJTYPES type, Texture2D texture, Vector2 position, Vector2 velocity)
         {
+            IsActive = true;
             _type = type;
             _tTexture = texture;
             _startPos = _vPosition = position;

@@ -16,8 +16,6 @@ namespace Akunoids.StateStuff
         private Rectangle _windowBounds;
 
         private Texture2D _background;
-        private Paddle _player;
-        private Brick _brick1;
 
         public BoardState(Game game, StateManager stateManager)
         {
@@ -33,14 +31,14 @@ namespace Akunoids.StateStuff
             var playerStart = new Vector2((_windowBounds.Width >> 1) - 64, _windowBounds.Height - 41);
             var ballStart = new Vector2((_windowBounds.Width >> 1) - 16, _windowBounds.Height - 74);
             ObjectManager objManager = ObjectManager.GetInstance();
-            objManager.AddObjectByType(OBJTYPES.PADDLE, _game.Content.Load<Texture2D>(@"KyL_PaddleLarge"), playerStart, _windowBounds);
-            objManager.AddObjectByType(OBJTYPES.BALL, _game.Content.Load<Texture2D>(@"KyL_AkuBall"), ballStart, _windowBounds);
+            objManager.LoadTextures(_game, _windowBounds);
+            objManager.AddObjectByType(OBJTYPES.PADDLE, playerStart);
+            objManager.AddObjectByType(OBJTYPES.BALL, ballStart);
 
             //objManager.AddObjectByType(OBJTYPES.BRICK, _game.Content.Load<Texture2D>(@"KyL_SJBrick1"), new Vector2(100,100), _windowBounds);
             float fPosX, fPosY;
             fPosX = 80;
             fPosY = 64;
-            Texture2D brickTexture = _game.Content.Load<Texture2D>(@"KyL_SJBrick1");
             for (int i = 0; i < 40; i++)
             {
                 // increment x
@@ -53,7 +51,7 @@ namespace Akunoids.StateStuff
                     fPosX = 80;
                     fPosY += 42;
                 }
-                objManager.AddObjectByType(OBJTYPES.BRICK, brickTexture, new Vector2(fPosX, fPosY), _windowBounds);
+                objManager.AddObjectByType(OBJTYPES.BRICK, new Vector2(fPosX, fPosY));
                 continue;
             }
         }

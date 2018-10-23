@@ -8,18 +8,15 @@ namespace Akunoids.Objects
     public class Ball : SpriteObject
     {
         private float _movementSpeed = 5.0f;
-        private Rectangle _windowBounds;
 
         private bool _isInPlay;
         private float _fRotation;
         private float _fScale;
         private float _fSpinSpeed;
 
-        public Ball(Texture2D texture, Vector2 startPos, Rectangle windowBounds)
+        public Ball(Texture2D texture, Vector2 startPos)
             : base(OBJTYPES.BALL, texture, startPos, Vector2.Zero)
         {
-            _windowBounds = windowBounds;
-
             SetPosition(startPos);
             SetVelocity(Vector2.Zero);
             _isInPlay = false;
@@ -52,7 +49,7 @@ namespace Akunoids.Objects
             {
                 // Wall Collision
                 // Right wall
-                if ((GetPosition().X + GetBoundingBox().Width) >= _windowBounds.Width)
+                if ((GetPosition().X + GetBoundingBox().Width) >= obj.WindowBounds.Width)
                     SetVelocity(GetVelocity().X * -1, GetVelocity().Y);
                 // Left wall
                 if (GetPosition().X <= 0)
@@ -61,7 +58,7 @@ namespace Akunoids.Objects
                 if (GetPosition().Y <= 0)
                     SetVelocity(GetVelocity().X, GetVelocity().Y * -1);
                 // Bottom wall
-                if ((GetPosition().Y + GetBoundingBox().Height) >= _windowBounds.Height || kb.IsKeyDown(Keys.R))
+                if ((GetPosition().Y + GetBoundingBox().Height) >= obj.WindowBounds.Height || kb.IsKeyDown(Keys.R))
                 {
                     // reset ball
                     _isInPlay = false;
@@ -93,7 +90,7 @@ namespace Akunoids.Objects
                     if (brick.GetCollisionBox().Intersects(GetCollisionBox())) // TODO this is terrible collision detection
                     {
                         SetVelocity(GetVelocity() * -1);
-                        brick.IsActive = false;
+                        brick.IsVisable = false;
                         break;
                     }
                 }

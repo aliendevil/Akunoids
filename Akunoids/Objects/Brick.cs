@@ -6,21 +6,21 @@ namespace Akunoids.Objects
 {
     public class Brick : SpriteObject
     {
-        public bool IsActive;
+        public bool IsVisable;
         public bool HasPowerUp;
         public bool IsModified;
 
         public Brick(Texture2D texture, Vector2 startPosition) 
             : base(OBJTYPES.BRICK, texture, startPosition, Vector2.Zero)
         {
-            IsActive = true;
+            IsVisable = true;
             HasPowerUp = ObjectManager.GetInstance().rand.Next(1, 100) % 2 == 0;
             IsModified = false;
         }
 
         public override Rectangle GetCollisionBox()
         {
-            if (IsActive)
+            if (IsVisable)
                 return base.GetCollisionBox();
             else
                 return Rectangle.Empty;
@@ -29,18 +29,19 @@ namespace Akunoids.Objects
 
         public override void Update(GameTime gameTime)
         {
-            if (!IsActive)
+            if (!IsVisable)
             {
                 if (HasPowerUp)
                 {
-                    // TODO add powerup
+                    ObjectManager.GetInstance().AddObjectByType(OBJTYPES.POWERUP, GetPosition());
+                    HasPowerUp = false;
                 }
             }
         }
 
         public override void Draw(SpriteBatch sb)
         {
-            if (IsActive)
+            if (IsVisable)
             {
                 base.Draw(sb);
             }
