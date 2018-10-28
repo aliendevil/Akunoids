@@ -31,6 +31,9 @@ namespace Akunoids.Objects
 
         public override void Update(GameTime gameTime)
         {
+            if (!IsActive)
+                return;
+
             base.Update(gameTime);
 
             ObjectManager objMan = ObjectManager.GetInstance();
@@ -48,36 +51,33 @@ namespace Akunoids.Objects
                 IsVisible = false;
                 SetVelocity(Vector2.Zero);
 
-                List<Brick> bricks = objMan.GetBricks();
                 switch (_type)
                 {
                     case (int)POWERUPS.AKU:
-                        foreach (Brick brick in bricks) // TODO get a random invisible brick that isn't already being modified
+                        List<Brick> inactiveBricks = objMan.GetInactiveBricks();
+                        int index = objMan.rand.Next(1, inactiveBricks.Count) - 1;
+                        Brick addBrick = inactiveBricks[index];
+                        if (!addBrick.IsCurrentlyModified)
                         {
-                            if (!brick.IsVisable)
-                            {
-                                if (!brick.IsCurrentlyModified)
-                                {
-                                    objMan.AddObjectByType(OBJTYPES.ADDBRICK, brick.GetPosition());
-                                    IsActive = false;
-                                    IsVisible = false;
-                                    brick.IsCurrentlyModified = true;
-                                    break;
-                                }
-                            }
+                            objMan.AddObjectByType(OBJTYPES.ADDBRICK, addBrick.GetPosition());
+                            IsActive = false;
+                            IsVisible = false;
+                            addBrick.IsCurrentlyModified = true;
+                            break;
                         }
                         break;
                     case (int)POWERUPS.JACK:
-                        foreach (Brick brick in bricks)
+                        List<Brick> bricks = objMan.GetBricks();
+                        foreach (Brick subBrick in bricks)
                         {
-                            if (brick.IsVisable)
+                            if (subBrick.IsVisable)
                             {
-                                if (!brick.IsCurrentlyModified)
+                                if (!subBrick.IsCurrentlyModified)
                                 {
-                                    objMan.AddObjectByType(OBJTYPES.SUBBRICK, brick.GetPosition());
+                                    objMan.AddObjectByType(OBJTYPES.SUBBRICK, subBrick.GetPosition());
                                     IsActive = false;
                                     IsVisible = false;
-                                    brick.IsCurrentlyModified = true;
+                                    subBrick.IsCurrentlyModified = true;
                                     break;
                                 }
                             }

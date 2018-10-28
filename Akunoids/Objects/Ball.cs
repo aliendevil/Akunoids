@@ -107,6 +107,7 @@ namespace Akunoids.Objects
                     {
                         SetVelocity(GetVelocity() * -1);
                         brick.IsVisable = false;
+                        brick.IsActive = false;
                         break;
                     }
                 }

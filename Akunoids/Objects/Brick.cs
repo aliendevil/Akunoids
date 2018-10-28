@@ -14,8 +14,7 @@ namespace Akunoids.Objects
             : base(OBJTYPES.BRICK, texture, startPosition, Vector2.Zero)
         {
             IsVisable = true;
-            //HasPowerUp = ObjectManager.GetInstance().rand.Next(1, 100) % 2 == 0;
-            HasPowerUp = true;
+            SetPowerUp();
             IsCurrentlyModified = false;
         }
 
@@ -25,6 +24,12 @@ namespace Akunoids.Objects
                 return base.GetCollisionBox();
             else
                 return Rectangle.Empty;
+        }
+
+        public void SetPowerUp()
+        {
+            HasPowerUp = ObjectManager.GetInstance().rand.Next(1, 100) % 2 == 0;
+            //HasPowerUp = true;
         }
 
 

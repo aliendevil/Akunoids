@@ -47,6 +47,7 @@ namespace Akunoids.Objects
         public Ball GetBall() { return _spriteObjects.OfType<Ball>().First(); }
         public List<Brick> GetBricks() { return _spriteObjects.OfType<Brick>().ToList(); }
         public Brick GetBrick(int index) { return _spriteObjects.OfType<Brick>().ToList()[index]; }
+        public List<Brick> GetInactiveBricks() { return _spriteObjects.OfType<Brick>().ToList().FindAll(a => !a.IsActive); }
         // TODO: add a get random visable brick and a get random invisable brick methods (and not modified)
 
         public void AddObject(SpriteObject sObject) { _spriteObjects.Add(sObject); }
