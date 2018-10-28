@@ -85,6 +85,11 @@ namespace Akunoids.Objects
             _vVelocity.Y = y;
         }
 
+        public void SetBoundingBox(Rectangle boundingBox)
+        {
+            _rBoundingBox = boundingBox;
+        }
+
         public virtual void Draw(SpriteBatch sb)
         {
             sb.Draw(GetTexture(), GetPosition(), GetBoundingBox(), Color.White);

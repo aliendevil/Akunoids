@@ -8,14 +8,15 @@ namespace Akunoids.Objects
     {
         public bool IsVisable;
         public bool HasPowerUp;
-        public bool IsModified;
+        public bool IsCurrentlyModified;
 
         public Brick(Texture2D texture, Vector2 startPosition) 
             : base(OBJTYPES.BRICK, texture, startPosition, Vector2.Zero)
         {
             IsVisable = true;
-            HasPowerUp = ObjectManager.GetInstance().rand.Next(1, 100) % 2 == 0;
-            IsModified = false;
+            //HasPowerUp = ObjectManager.GetInstance().rand.Next(1, 100) % 2 == 0;
+            HasPowerUp = true;
+            IsCurrentlyModified = false;
         }
 
         public override Rectangle GetCollisionBox()

@@ -14,6 +14,8 @@ namespace Akunoids.Objects
         private float _fScale;
         private float _fSpinSpeed;
 
+        private Vector2 _oldVelocity;
+
         public Ball(Texture2D texture, Vector2 startPos)
             : base(OBJTYPES.BALL, texture, startPos, Vector2.Zero)
         {
@@ -47,6 +49,20 @@ namespace Akunoids.Objects
             }
             else
             {
+                //Pause the ball // TODO: make a cheat
+                if (kb.IsKeyDown(Keys.P))
+                {
+                    if (GetVelocity() == Vector2.Zero)
+                    {
+                        SetVelocity(_oldVelocity);
+                    }
+                    else
+                    {
+                        _oldVelocity = GetVelocity();
+                        SetVelocity(Vector2.Zero);
+                    }
+                }
+
                 // Wall Collision
                 // Right wall
                 if ((GetPosition().X + GetBoundingBox().Width) >= obj.WindowBounds.Width)

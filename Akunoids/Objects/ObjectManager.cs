@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 namespace Akunoids.Objects
 {
@@ -27,6 +28,7 @@ namespace Akunoids.Objects
         private Texture2D _ballTexture;
         private Texture2D _brickTexture;
         private Texture2D _powerUpTexture;
+        private Texture2D _akuTexture;
 
         public void LoadTextures(Game game, Rectangle windowBounds)
         {
@@ -34,15 +36,18 @@ namespace Akunoids.Objects
             _paddleTexture = game.Content.Load<Texture2D>(@"KyL_PaddleLarge");
             _ballTexture = game.Content.Load<Texture2D>(@"KyL_AkuBall");
             _brickTexture = game.Content.Load<Texture2D>(@"KyL_SJBrick1");
-            _powerUpTexture = game.Content.Load<Texture2D>(@"KyL_SJBrick1");
+            _powerUpTexture = game.Content.Load<Texture2D>(@"KyL_SJBrick2");
+            _akuTexture = game.Content.Load<Texture2D>(@"KyL_AkuAdd");
         }
 
         public int GetSize () { return _spriteObjects.Count; }
         public int GetNumberOfBricks() { return GetBricks().Count; }
 
-        public Paddle GetPaddle() { return (Paddle)_spriteObjects.Find(x => x.Type().Equals(OBJTYPES.PADDLE)); }
-        public Ball GetBall() { return (Ball)_spriteObjects.Find(x => x.Type().Equals(OBJTYPES.BALL)); }
-        public List<SpriteObject> GetBricks() { return _spriteObjects.FindAll(x => x.Type().Equals(OBJTYPES.BRICK)); }
+        public Paddle GetPaddle() { return _spriteObjects.OfType<Paddle>().First(); }
+        public Ball GetBall() { return _spriteObjects.OfType<Ball>().First(); }
+        public List<Brick> GetBricks() { return _spriteObjects.OfType<Brick>().ToList(); }
+        public Brick GetBrick(int index) { return _spriteObjects.OfType<Brick>().ToList()[index]; }
+        // TODO: add a get random visable brick and a get random invisable brick methods (and not modified)
 
         public void AddObject(SpriteObject sObject) { _spriteObjects.Add(sObject); }
 
@@ -73,6 +78,18 @@ namespace Akunoids.Objects
                         // TODO check to see if we have any inactive before creating
                         PowerUp pUp = new PowerUp(_powerUpTexture, startPos);
                         _spriteObjects.Add(pUp);
+                        break;
+                    }
+                case OBJTYPES.ADDBRICK:
+                    {
+                        var bricks = GetBricks();
+                        Brick brick = bricks.Find(a => a.GetPosition() == startPos);
+                        AddBrick ab = new AddBrick(_akuTexture, brick);
+                        _spriteObjects.Add(ab);
+                        break;
+                    }
+                case OBJTYPES.SUBBRICK:
+                    {
                         break;
                     }
             }

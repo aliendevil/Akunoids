@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="Enums.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="Objects\AddBrick.cs" />
     <Compile Include="Objects\Ball.cs" />
     <Compile Include="Objects\Brick.cs" />
     <Compile Include="Objects\ObjectManager.cs" />
@@ -93,6 +94,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Content\Akunoids.mgcb" />
+    <None Include="Content\KyL_AkuAdd.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Content\KyL_AkuBall.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -103,6 +107,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Content\KyL_SJBrick1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\KyL_SJBrick2.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
